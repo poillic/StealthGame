@@ -9,6 +9,7 @@ public class PlayerTrigger : MonoBehaviour
     #region Variables
 
     public UnityEvent OnPlayerEnter;
+    public UnityEvent OnPlayerStay;
     public UnityEvent OnPlayerExit;
 
 #endregion
@@ -21,6 +22,14 @@ public class PlayerTrigger : MonoBehaviour
         {
             OnPlayerEnter.Invoke();
         }   
+    }
+
+    private void OnTriggerStay( Collider other )
+    {
+        if ( other.CompareTag( "Player" ) )
+        {
+            OnPlayerStay.Invoke();
+        }
     }
 
     private void OnTriggerExit( Collider other )

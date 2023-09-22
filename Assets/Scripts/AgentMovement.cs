@@ -134,5 +134,14 @@ public class AgentMovement : MonoBehaviour
         }
     }
 
+    public void Chase( Transform target )
+    {
+        _navMeshAgent.SetDestination( target.position );
+    }
+
+    public Vector3 GetCurrentWaypoint()
+    {
+        return m_waypoints[ _currentWaypoint ].position;
+    }
 #endregion
 }
