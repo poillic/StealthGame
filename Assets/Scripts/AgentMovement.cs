@@ -57,8 +57,41 @@ public class AgentMovement : MonoBehaviour
 
     void Update()
     {
+
+    }
+
+#endregion
+
+#region Main Methods
+
+    private void Increment()
+    {
+        _currentWaypoint++;
+
+        if ( _currentWaypoint > m_waypoints.Length - 1 )
+        {
+            _currentWaypoint = 0;
+        }
+
+        _navMeshAgent.SetDestination( m_waypoints[ _currentWaypoint ].position );
+    }
+
+    private void Decrement()
+    {
+        _currentWaypoint--;
+
+        if ( _currentWaypoint < 0 )
+        {
+            _currentWaypoint = m_waypoints.Length - 1;
+        }
+
+        _navMeshAgent.SetDestination( m_waypoints[ _currentWaypoint ].position );
+    }
+
+    public void Move()
+    {
         //CloseGuard
-        if( _navMeshAgent.remainingDistance >= 1f )
+        if ( _navMeshAgent.remainingDistance >= 1f )
             return;
 
         switch ( m_currentMode )
@@ -99,35 +132,7 @@ public class AgentMovement : MonoBehaviour
             default:
                 break;
         }
-
     }
 
-#endregion
-
-#region Main Methods
-
-    private void Increment()
-    {
-        _currentWaypoint++;
-
-        if ( _currentWaypoint > m_waypoints.Length - 1 )
-        {
-            _currentWaypoint = 0;
-        }
-
-        _navMeshAgent.SetDestination( m_waypoints[ _currentWaypoint ].position );
-    }
-
-    private void Decrement()
-    {
-        _currentWaypoint--;
-
-        if ( _currentWaypoint < 0 )
-        {
-            _currentWaypoint = m_waypoints.Length - 1;
-        }
-
-        _navMeshAgent.SetDestination( m_waypoints[ _currentWaypoint ].position );
-    }
 #endregion
 }
